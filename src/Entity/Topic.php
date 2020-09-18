@@ -40,13 +40,13 @@ class Topic
     private $resolu;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="topics")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="topics")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=categorie::class, inversedBy="topics")
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="topics")
      * @ORM\JoinColumn(nullable=false)
      */
     private $categorie;
@@ -56,9 +56,15 @@ class Topic
      */
     private $posts;
 
+    /**
+     * @ORM\Column(type="string", length=101)
+     */
+    private $Titre;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+         $this->creationDate = new \DateTime();  // \ puisque classe native de php 
     }
 
     public function getId(): ?int
@@ -165,6 +171,18 @@ class Topic
                 $post->setTopic(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->Titre;
+    }
+
+    public function setTitre(string $Titre): self
+    {
+        $this->Titre = $Titre;
 
         return $this;
     }

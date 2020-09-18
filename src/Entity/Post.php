@@ -23,16 +23,21 @@ class Post
     private $reponse;
 
     /**
-     * @ORM\ManyToOne(targetEntity=topic::class, inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity=Topic::class, inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $topic;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $creationDate;
 
     public function getId(): ?int
     {
@@ -71,6 +76,18 @@ class Post
     public function setUser(?user $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCreationDate(): ?\DateTimeInterface
+    {
+        return $this->creationDate;
+    }
+
+    public function setCreationDate(\DateTimeInterface $creationDate): self
+    {
+        $this->creationDate = $creationDate;
 
         return $this;
     }

@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+
 use App\Entity\Topic;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Topic|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +20,24 @@ class TopicRepository extends ServiceEntityRepository
         parent::__construct($registry, Topic::class);
     }
 
+    public function getAll(){
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+                'SELECT t
+                    FROM App\Entity\Topic t
+                    ORDER BY t.creationDate DESC'
+        );
+        return $query->execute();
+    }
+
+    // public function getOneById($id){
+    //     $entityManager = $this->getEntityManager();
+    //     $query = $entityManager->createQuery(
+    //         'SELECT '
+    //     )
+    // }
+
+    
     // /**
     //  * @return Topic[] Returns an array of Topic objects
     //  */

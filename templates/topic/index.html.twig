@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TopicController!{% endblock %}
+{% block contenu %}
+
+<table>
+    <thead>
+        <tr>
+            <th>TITRE</th>
+            <th>CATEGORIE</th>
+            <th>NBRE DE REPONSE</th>
+            <th>UTILISATEUR</th>
+            <th>DATE DE CREATION</th>
+        </tr>
+    </thead>
+</table>
+<tbody> 
+    {% for topic in topics %}
+
+        <tr>
+            <td>
+                <a href="{{ path('topic_show', {'id':topic.id }) }}">{{ topic.titre }}</a>
+            </td>
+            {# <td>
+                <a href="{{ path('categorie_show', {'id':categorie.id }) }}">{{ topic.categorie.categorieNom }}</a>
+            </td> #}
+            {# <td>{{ topic.posts | lenght }}</td> #}
+            {# <td>{{ topic.user. }}</td> #}
+            <td>{{ topic.creationDate | date('d/m/Y') }}</td>
+        </tr>
+    {% endfor %}
+    <tbody>
+</table>
+{% endblock %}
+
