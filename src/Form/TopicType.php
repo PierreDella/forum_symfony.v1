@@ -23,14 +23,10 @@ class TopicType extends AbstractType
         $builder
             ->add('titre', null)
             ->add('sujet', TextType::class)
-           
-            ->add('categorie', EntityType::class, [
-                'class' => Categorie::class, 
-                'choice_label' => 'categorieNom',
-            ])
             ->add('Valider', SubmitType::class)
             ->getForm();
-        ;
+        
+        
     }
 
     public function configureOptions(OptionsResolver $resolver)

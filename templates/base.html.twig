@@ -3,9 +3,39 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+        <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@300&display=swap" rel="stylesheet">
+            <!-- UIkit CSS -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        {% endblock %}
     </head>
     <body>
+        <nav class="uk-navbar-container" uk-navbar>
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a href="{{ path('categories_index') }}">Categories</a>
+                    </li>
+
+                    {% if app.user %}
+                     <li>
+                        <a href="{{ path('app_logout') }}">Déconnexion</a>
+                    </li> 
+                    {% else %}
+                    <li>
+                        <a href="{{ path('app_login') }}">Login</a>
+                    </li> 
+                     <li>
+                       <a href="{{ path('app_register') }}">Register</a>
+                    </li>
+                    {% endif %}
+                    
+
+                </ul>
+            </div>
+        </nav>
         {% block contenu %}
         {% endblock %}
         {% block body %}{% endblock %}

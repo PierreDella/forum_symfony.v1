@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de tpics par catégorie{% endblock %}
+{% block contenu %}
+
+<table>
+    <thead>
+        <tr>
+            <th>TITRE</th>
+            <th>NBRE DE REPONSE</th>
+            <th>UTILISATEUR</th>
+            <th>DATE DE CREATION</th>
+        </tr>
+    </thead>
+
+<tbody> 
+
+
+         {% for topic in categorie.topics %}
+         <tr>
+            <td>
+                {{ topic.titre }}
+             </td>
+             <td>
+                {{ topic.posts | length }}
+             </td>
+             <td>
+                {{ topic.user.username }}
+             </td>
+             <td>{{ topic.creationDate | date('d/m/Y') }}</td>
+            <td><a href="{{ path('topic_delete', {'id':topic.id}) }}">Supprimer</a></td> 
+        </tr>
+        
+         {% endfor %}
+    <a href="{{ path('add_topic', {'id':categorie.id}) }}">AJOUTER UN TOPIC</a>
+    <tbody>
+</table>
+{% endblock %}

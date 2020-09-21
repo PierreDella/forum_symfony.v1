@@ -4,8 +4,9 @@ namespace App\Controller;
 
 use index;
 use App\Entity\User;
+use App\Entity\Categorie;
 use App\Entity\Topic;
-use App\Form\TopicType;
+use App\Form\TopicType; 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,18 +23,16 @@ class TopicController extends AbstractController
 {
 
     /**
-     * @Route("/add", name="add_topic")
+     * @Route("/add/{id}", name="add_topic")
      * 
      */
 
 
-    public function addTopic(Topic $topic = null, Request $request, EntityManagerInterface $manager) {
+    public function addTopic( Request $request, EntityManagerInterface $manager, Categorie $categorie) {
 
-        if(!$topic){
-            $topic = new Topic();
-        
-        }
-       
+
+        $topic = new Topic();
+
         $form = $this->createForm(TopicType::class, $topic);
         
         $form->handleRequest($request);
@@ -41,12 +40,13 @@ class TopicController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
        
             $topic->setUser($this->getUser());
+            $topic->setCategorie($categorie);
             $topic->setLocked(false);
             $manager->persist($topic);
             $manager->flush();
 
 
-        return $this->redirectToRoute('topic_index');
+        return $this->redirectToRoute('categorie_show', ['id'=> $topic->getCategorie()->getId()]);
         }   
 
         return $this->render("topic/add.html.twig", [
@@ -62,7 +62,7 @@ class TopicController extends AbstractController
         $manager->remove($topic);
         $manager->flush();
 
-        return $this->redirectToRoute('topic_index');
+        return $this->redirectToRoute('categorie_show', ['id'=> $topic->getCategorie()->getId()]);
     }
 
 
@@ -74,7 +74,7 @@ class TopicController extends AbstractController
     {
         $topics = $this->getDoctrine()
             ->getRepository(Topic::class)
-            ->getAll();
+            ->findBy([], ['creationDate' => 'DESC']);
         return $this->render('topic/index.html.twig', [
             'topics' => $topics,
         ]);

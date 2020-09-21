@@ -23,11 +23,17 @@ class CategorieRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
                 'SELECT c
-                    FROM App\Entity\Categorie c'
+                FROM App\Entity\Categorie c'
         );
 
         return $query->execute();
     }
+
+    public function findById() {
+
+    }
+
+    
     // /**
     //  * @return Categorie[] Returns an array of Categorie objects
     //  */
