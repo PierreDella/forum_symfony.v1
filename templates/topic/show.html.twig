@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de tpics par catégorie{% endblock %}
+{% block contenu %}
+
+
+<div class="card border-light mb-3">
+        <h4 color="red" class="card-header">{{ topic.titre }}{{ " " }}{{ topic.posts | length }}</h4>
+        <div class="card-body">
+            <p class="card-title">{{ topic.sujet }}</p>
+        </div>
+        </div> 
+
+<table>
+    <thead>
+        <tr>
+            <th>TITRE</th>
+            <th>UTILISATEUR</th>
+            <th>DATE DE CREATION</th>
+        </tr>
+    </thead>
+
+<tbody> 
+
+
+         {% for post in topic.posts %}
+              
+          <tr>
+            <td>
+                
+             </td>
+             <td>
+                {{ topic.posts | length }}
+             </td>
+             <td>
+                
+             </td>
+             <td>{{ topic.creationDate | date('d/m/Y') }}</td>
+            <td><a href="{{ path('topic_delete', {'id':topic.id}) }}">Supprimer</a></td> 
+        </tr> 
+        
+         {% endfor %}
+    {# 
+
+    {# {% for post in topic.posts %} 
+
+       <div class="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    {% endfor %} #}
+{% endblock %}

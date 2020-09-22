@@ -3,6 +3,8 @@
 {% block title %}Liste de tpics par catégorie{% endblock %}
 {% block contenu %}
 
+
+
 <table>
     <thead>
         <tr>
@@ -19,7 +21,7 @@
          {% for topic in categorie.topics %}
          <tr>
             <td>
-                {{ topic.titre }}
+                <a href="{{ path('topic_show', { 'id':topic.id }) }}">{{ topic.titre }}</a>
              </td>
              <td>
                 {{ topic.posts | length }}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use index;
+use App\Entity\Post;
 use App\Entity\User;
 use App\Entity\Categorie;
 use App\Entity\Topic;
@@ -83,6 +84,8 @@ class TopicController extends AbstractController
      * @Route("/{id}", name="topic_show", methods="GET")
      */
     public function show(Topic $topic): Response {
-        return $this->render('topic/show.html.twig', ['topic' => $topic]);
+        return $this->render('topic/show.html.twig', [
+            'topic' => $topic
+            ]);
     }
 }
